@@ -1,6 +1,5 @@
 package com.oigma.opemus.data.services
 
-import com.oigma.opemus.data.models.Track
 import kotlinx.coroutines.Job
 
 /**
@@ -19,4 +18,12 @@ class RequestHandler(private val job: Job) {
     fun cancel() {
         job.cancel()
     }
+}
+
+class ServiceManager : Services {
+    override val tracks: TrackService
+        get() = TrackServiceImpl()
+    override val auth: AuthService
+        get() = AuthServiceImpl()
+
 }

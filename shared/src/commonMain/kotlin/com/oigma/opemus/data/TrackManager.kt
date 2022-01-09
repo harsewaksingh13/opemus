@@ -40,7 +40,7 @@ class TrackManagerImpl(private val services: Services): BasicManager(), TrackMan
 
     private var _tracks: MutableStateFlow<List<Track>> = MutableStateFlow(listOf())
 
-    private val _libraryItems: MutableStateFlow<List<LibraryItem>> = MutableStateFlow(listOf(LibraryItem(icon = "", name = LibraryType.songs)))
+    private val _libraryItems: MutableStateFlow<List<LibraryItem>> = MutableStateFlow(LibraryItem.previewItems)
 
     override fun fetchTracks() {
         execute({
