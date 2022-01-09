@@ -1,18 +1,16 @@
 package com.oigma.opemus.android
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.oigma.opemus.Greeting
-import android.widget.TextView
 import androidx.activity.ComponentActivity
-import androidx.core.view.WindowCompat
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import com.oigma.opemus.data.LibraryItem
+import androidx.core.view.WindowCompat
+import com.oigma.opemus.Greeting
 import com.oigma.opemus.data.TrackManager
-
+import com.oigma.opemus.data.TrackManagerImpl
+import com.oigma.opemus.data.services.ServiceManager
 
 
 fun greet(): String {
@@ -20,12 +18,12 @@ fun greet(): String {
 }
 
 class MainActivity : ComponentActivity() {
-    private val trackManager: TrackManager by viewModels()
+    private val trackManager: TrackManager = TrackManagerImpl(ServiceManager())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-       // Logger.withTag("MainActivity").i("onCreate")
+        // Logger.withTag("MainActivity").i("onCreate")
 
         WindowCompat.setDecorFitsSystemWindows(window, false)
 

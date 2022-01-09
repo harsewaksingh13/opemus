@@ -8,3 +8,10 @@ import com.oigma.opemus.data.models.Track
 interface TrackService {
    suspend fun recentlyPlayed() : List<Track>
 }
+
+class TrackServiceImpl(): TrackService {
+
+   override suspend fun recentlyPlayed(): List<Track> {
+      return listOf()
+   }
+}
