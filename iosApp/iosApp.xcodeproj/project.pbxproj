@@ -10,6 +10,10 @@
 		058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557BA273AAA24004C7B11 /* Assets.xcassets */; };
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
+		226B6226278E04C8007D3B3C /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226B6225278E04C8007D3B3C /* LibraryView.swift */; };
+		226B6228278E0566007D3B3C /* LibraryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226B6227278E0566007D3B3C /* LibraryListView.swift */; };
+		226B622A278E057A007D3B3C /* LibraryItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226B6229278E057A007D3B3C /* LibraryItemView.swift */; };
+		226B622C278E473A007D3B3C /* LibraryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226B622B278E473A007D3B3C /* LibraryStore.swift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +34,10 @@
 		058557BA273AAA24004C7B11 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
+		226B6225278E04C8007D3B3C /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
+		226B6227278E0566007D3B3C /* LibraryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryListView.swift; sourceTree = "<group>"; };
+		226B6229278E057A007D3B3C /* LibraryItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryItemView.swift; sourceTree = "<group>"; };
+		226B622B278E473A007D3B3C /* LibraryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryStore.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -54,6 +62,17 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		226B6224278E04A9007D3B3C /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				226B6225278E04C8007D3B3C /* LibraryView.swift */,
+				226B6227278E0566007D3B3C /* LibraryListView.swift */,
+				226B6229278E057A007D3B3C /* LibraryItemView.swift */,
+				226B622B278E473A007D3B3C /* LibraryStore.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		7555FF72242A565900829871 = {
 			isa = PBXGroup;
 			children = (
@@ -74,6 +93,7 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
+				226B6224278E04A9007D3B3C /* UI */,
 				058557BA273AAA24004C7B11 /* Assets.xcassets */,
 				7555FF82242A565900829871 /* ContentView.swift */,
 				7555FF8C242A565B00829871 /* Info.plist */,
@@ -182,7 +202,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				226B6228278E0566007D3B3C /* LibraryListView.swift in Sources */,
+				226B622A278E057A007D3B3C /* LibraryItemView.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
+				226B622C278E473A007D3B3C /* LibraryStore.swift in Sources */,
+				226B6226278E04C8007D3B3C /* LibraryView.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
