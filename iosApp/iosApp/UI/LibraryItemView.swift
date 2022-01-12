@@ -13,6 +13,7 @@ typealias LibraryItem = shared.LibraryItem
 typealias LibraryType = shared.LibraryType
 typealias TrackManager = shared.TrackManager
 typealias TrackManagerImpl = shared.TrackManagerImpl
+typealias ServiceManager = shared.ServiceManager
 typealias Services = shared.Services
 
 let LibraryPreviewItems = LibraryItem.Companion.shared.previewItems
