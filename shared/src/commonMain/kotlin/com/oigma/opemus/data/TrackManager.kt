@@ -4,6 +4,7 @@ import com.oigma.opemus.data.models.Track
 import com.oigma.opemus.data.services.Services
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
 /**
  * Created by Harsewak Singh on 08/01/2022.
@@ -11,14 +12,14 @@ import kotlinx.coroutines.flow.MutableStateFlow
  * a track is representation of song/video media file
  */
 interface TrackManager: BaseManager {
-    val recentTracks: Flow<List<Track>>
+    val recentTracks: List<Track>
     val libraryItems: Flow<List<LibraryItem>>
     fun fetchTracks()
 }
 
-data class LibraryItem(val icon: String, val name: LibraryType) {
+data class LibraryItem(val id: Int, val icon: String, val name: LibraryType) {
     companion object {
-        val previewItems: List<LibraryItem> = arrayListOf(LibraryItem("", LibraryType.songs), LibraryItem("", LibraryType.playlist), LibraryItem("", LibraryType.playlist), LibraryItem("", LibraryType.playlist), LibraryItem("", LibraryType.playlist), LibraryItem("", LibraryType.playlist), LibraryItem("", LibraryType.playlist), LibraryItem("", LibraryType.songs))
+        val previewItems: List<LibraryItem> = arrayListOf(LibraryItem(0,"", LibraryType.songs), LibraryItem(1,"", LibraryType.playlist), LibraryItem(2,"", LibraryType.playlist), LibraryItem(3,"", LibraryType.playlist), LibraryItem(4,"", LibraryType.playlist), LibraryItem(5,"", LibraryType.playlist), LibraryItem(6,"", LibraryType.playlist), LibraryItem(7,"", LibraryType.songs))
     }
 }
 
@@ -32,8 +33,8 @@ data class LibraryType(val name: String) {
 
 class TrackManagerImpl(private val services: Services): BasicManager(), TrackManager {
 
-    override val recentTracks: Flow<List<Track>>
-        get() = _tracks
+    override val recentTracks: List<Track>
+        get() = _tracks.asStateFlow().value
 
     override val libraryItems: Flow<List<LibraryItem>>
         get() = _libraryItems
