@@ -26,8 +26,6 @@ class AuthManagerImpl(private val services: Services) : BasicManager(), AuthMana
            services.auth.login()
         }, {
             _user.value = it
-        }, {
-            onError(it)
         })
 
     }

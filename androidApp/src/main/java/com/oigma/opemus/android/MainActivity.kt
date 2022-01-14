@@ -3,11 +3,11 @@ package com.oigma.opemus.android
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.view.WindowCompat
 import com.oigma.opemus.Greeting
+import com.oigma.opemus.android.ui.LibraryView
 import com.oigma.opemus.data.TrackManager
 import com.oigma.opemus.data.TrackManagerImpl
 import com.oigma.opemus.data.services.ServiceManager
@@ -29,7 +29,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             AppTheme {
-                LibraryUI(trackManager)
+                LibraryView(trackManager)
             }
         }
     }

@@ -7,6 +7,39 @@
 //
 
 import SwiftUI
+import shared
+
+typealias LibraryItem = shared.LibraryItem
+typealias LibraryType = shared.LibraryType
+typealias TrackManager = shared.TrackManager
+typealias TrackManagerImpl = shared.TrackManagerImpl
+typealias ServiceManager = shared.ServiceManager
+typealias Services = shared.Services
+
+let LibraryPreviewItems = LibraryItem.Companion.shared.previewItems
+
+struct LibraryItemView: View {
+    
+    let library: LibraryItem
+    
+    var body: some View {
+        HStack {
+            Text(library.name.name)
+            Spacer()
+        }
+    }
+}
+
+struct LibraryListView: View {
+    
+   let items: [LibraryItem]
+    
+    var body: some View {
+        List(items, id: \.id) {
+            LibraryItemView(library: $0)
+        }
+    }
+}
 
 struct LibraryView: View {
     

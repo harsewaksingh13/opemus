@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.asStateFlow
  * a track is representation of song/video media file
  */
 interface TrackManager : BaseManager {
-    val recentTracks: List<Track>
+    val recentTracks: Flowable<List<Track>>
     val libraryItems: Flowable<List<LibraryItem>>
     fun fetchTracks()
 }
@@ -41,8 +41,8 @@ data class LibraryType(val name: String) {
 
 class TrackManagerImpl(private val services: Services) : BasicManager(), TrackManager {
 
-    override val recentTracks: List<Track>
-        get() = _tracks.asStateFlow().value
+    override val recentTracks: Flowable<List<Track>>
+        get() = _tracks.flowable()
 
     override val libraryItems: Flowable<List<LibraryItem>>
         get() = _libraryItems.flowable()
