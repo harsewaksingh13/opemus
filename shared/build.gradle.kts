@@ -67,3 +67,8 @@ android {
         targetSdk = 31
     }
 }
+dependencies {
+    implementation("androidx.core:core:1.7.0")
+    implementation("androidx.activity:activity-ktx:1.4.0")
+    implementation("androidx.lifecycle:lifecycle-common:2.4.0")
+}

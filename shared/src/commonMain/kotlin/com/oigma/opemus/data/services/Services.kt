@@ -10,15 +10,6 @@ interface Services {
     val auth: AuthService
 }
 
-typealias ResponseHandler<T> = (T) -> Unit
-
-typealias ErrorHandler = (Throwable) -> Unit
-
-class RequestHandler(private val job: Job) {
-    fun cancel() {
-        job.cancel()
-    }
-}
 
 class ServiceManager : Services {
     override val tracks: TrackService

@@ -1,4 +1,4 @@
-package com.oigma.opemus.android
+package com.oigma.opemus
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -17,7 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun TopAppBar(
+fun AppTopBar(
     navigationIcon: @Composable (() -> Unit),
     title: @Composable () -> Unit,
     actions: @Composable RowScope.() -> Unit = {},

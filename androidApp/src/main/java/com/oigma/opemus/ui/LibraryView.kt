@@ -1,4 +1,4 @@
-package com.oigma.opemus.android.ui
+package com.oigma.opemus.ui
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -8,8 +8,11 @@ import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.oigma.opemus.android.AppTheme
+import com.oigma.opemus.AppTopBar
+import com.oigma.opemus.R
+import com.oigma.opemus.theme.AppTheme
 import com.oigma.opemus.data.LibraryItem
 import com.oigma.opemus.data.TrackManager
 
@@ -21,7 +24,7 @@ fun LibraryView(trackManager: TrackManager) {
     Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
         Scaffold(
             topBar = {
-                com.oigma.opemus.android.TopAppBar(
+                AppTopBar(
                     contentPadding = AppBarDefaults.ContentPadding,
                     navigationIcon = {
                         IconButton(onClick = { }) {
@@ -30,8 +33,7 @@ fun LibraryView(trackManager: TrackManager) {
                     },
                     title = {
                         Text(
-//                            text = stringResource(R.string.app_name),
-                            text = "Opemus",
+                            text = stringResource(R.string.app_name),
                             color = MaterialTheme.colors.onPrimary,
                         )
                     },

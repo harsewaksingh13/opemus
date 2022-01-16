@@ -1,4 +1,4 @@
-package com.oigma.opemus.android
+package com.oigma.opemus
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
