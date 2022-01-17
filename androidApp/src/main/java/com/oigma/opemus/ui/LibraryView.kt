@@ -1,5 +1,6 @@
 package com.oigma.opemus.ui
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
@@ -10,10 +11,12 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
 import com.oigma.opemus.AppTopBar
 import com.oigma.opemus.R
 import com.oigma.opemus.theme.AppTheme
 import com.oigma.opemus.data.LibraryItem
+import com.oigma.opemus.data.ResponseHandler
 import com.oigma.opemus.data.TrackManager
 
 /**
@@ -21,6 +24,8 @@ import com.oigma.opemus.data.TrackManager
  */
 @Composable
 fun LibraryView(trackManager: TrackManager) {
+    val navigationController = rememberNavController()
+
     Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
         Scaffold(
             topBar = {
@@ -53,17 +58,21 @@ fun LibraryView(trackManager: TrackManager) {
             Box(Modifier.padding(contentPadding)) {
                 LibraryListView(
                     trackManager.libraryItems.collectAsState(listOf()).value
-                )
+                ) {
+                    navigationController.navigate("songs")
+                }
             }
         }
     }
 }
 
 @Composable
-fun LibraryListView(items: List<LibraryItem>) {
+fun LibraryListView(items: List<LibraryItem>, itemClickListener: ResponseHandler<LibraryItem>? = null) {
     LazyColumn {
         items(items.size) { index ->
-            LibraryItemView(items[index])
+            Row(modifier = Modifier.clickable { itemClickListener?.invoke(items[index]) }) {
+                LibraryItemView(items[index])
+            }
         }
     }
 }

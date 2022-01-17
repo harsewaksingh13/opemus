@@ -1,7 +1,5 @@
 package com.oigma.opemus.data
 
-import com.oigma.opemus.data.services.ErrorHandler
-import com.oigma.opemus.data.services.ResponseHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -16,27 +14,41 @@ interface BaseManager {
     val error: Flow<Throwable?>
 }
 
-open class BasicManager: BaseManager {
+fun <T> executeTask(
+    block: suspend () -> T,
+    responseHandler: ResponseHandler<T>,
+    errorHandler: ErrorHandler? = null
+) {
+    CoroutineScope(Dispatchers.Default).launch {
+        runCatching {
+            val results = block()
+            withContext(Dispatchers.Main) {
+                responseHandler(results)
+            }
+        }.onFailure { throwable ->
+            withContext(Dispatchers.Main) {
+                errorHandler?.let { it(AppError(throwable)) }
+            }
+        }
+    }
+}
+
+open class BasicManager : BaseManager {
 
 
     override val error: Flow<Throwable?>
         get() = errorStateFlow
 
-    protected var errorStateFlow: MutableStateFlow<Throwable?> = MutableStateFlow(null)
+    open var errorStateFlow: MutableStateFlow<Throwable?> = MutableStateFlow(null)
 
-    fun <T> execute(block : suspend () -> T, responseHandler: ResponseHandler<T>, errorHandler: ErrorHandler? = null) {
-        CoroutineScope(Dispatchers.Default).launch {
-            runCatching {
-                val results = block()
-                withContext(Dispatchers.Main) {
-                    responseHandler(results)
-                }
-            }.onFailure { throwable ->
-                withContext(Dispatchers.Main) {
-                    onError(throwable)
-                    errorHandler?.let { it(throwable) }
-                }
-            }
+    fun <T> execute(
+        block: suspend () -> T,
+        responseHandler: ResponseHandler<T>,
+        errorHandler: ErrorHandler? = null
+    ) {
+        executeTask(block, responseHandler) {
+            onError(it)
+            errorHandler?.invoke(it)
         }
     }
 

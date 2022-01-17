@@ -1,6 +1,5 @@
 package com.oigma.opemus.data
 
-import com.oigma.opemus.PermissionManager
 import com.oigma.opemus.data.models.Track
 import com.oigma.opemus.data.services.Services
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -37,10 +36,7 @@ data class LibraryType(val name: String) {
 }
 
 class TrackManagerImpl(
-    private val services: Services,
-    private val fileManager: FileManager,
-    private val permissionManager: PermissionManager
-) : BasicManager(), TrackManager {
+    private val services: Services) : BasicManager(), TrackManager {
 
     override val recentTracks: Flowable<List<Track>>
         get() = _tracks.flowable()
@@ -60,20 +56,7 @@ class TrackManagerImpl(
         MutableStateFlow(listOf())
 
     override fun start() {
-        permissionManager.requestStoragePermissions({
-            execute({
-                fileManager.findMediaFiles().map { it.toTrack() }
-            }, { tracks ->
-                _songs.value = tracks
-                val items = mutableListOf<LibraryItem>()
-                items.addAll(_libraryItems.value)
-                items.addAll(tracks.map { LibraryItem(9, "", LibraryType(it.file?.name ?: "")) })
-                _libraryItems.value = items
 
-            })
-        }, {
-            onError(it)
-        })
     }
 
     override fun fetchTracks() {
