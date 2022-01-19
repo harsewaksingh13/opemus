@@ -4,33 +4,47 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.view.WindowCompat
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.oigma.opemus.data.TrackManager
 import com.oigma.opemus.data.TrackManagerImpl
 import com.oigma.opemus.data.executeTask
+import com.oigma.opemus.data.models.Track
 import com.oigma.opemus.data.services.ServiceManager
 import com.oigma.opemus.theme.AppTheme
 import com.oigma.opemus.ui.LibraryView
+import com.oigma.opemus.ui.SongsView
+import kotlinx.coroutines.flow.MutableStateFlow
 
 
 class MainActivity : ComponentActivity() {
-    private lateinit var fileManager: DeviceDataManager
+    private lateinit var deviceDataManager: DeviceDataManager
     private val permissionManager = PermissionManager()
     private val trackManager: TrackManager =
         TrackManagerImpl(ServiceManager())
-
+    private val songs: MutableStateFlow<List<Track>> =
+        MutableStateFlow(listOf())
+    private lateinit var  player: Player
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        fileManager = DeviceDataManagerImpl(applicationContext)
+        deviceDataManager = DeviceDataManagerImpl(applicationContext)
+        player = Player(applicationContext)
         // Logger.withTag("MainActivity").i("onCreate")
         lifecycle.addObserver(permissionManager)
         permissionManager.registry = activityResultRegistry
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
         setContent {
+            val navController = rememberNavController()
             AppTheme {
-                LibraryView(trackManager)
+            NavHost(navController, startDestination = "welcome") {
+                composable("welcome") { LibraryView(trackManager, navController) }
+                composable("songs") { SongsView(songs.collectAsState().value, player) }
+            }
             }
         }
     }
@@ -39,12 +53,9 @@ class MainActivity : ComponentActivity() {
         super.onStart()
         permissionManager.requestStoragePermissions {
             executeTask({
-                fileManager.findTracks()
+                deviceDataManager.findTracks()
             }, {
-//                val items = mutableListOf<LibraryItem>()
-//                items.addAll(_libraryItems.value)
-//                items.addAll(tracks.map { LibraryItem(9, "", LibraryType(it.file?.name ?: "")) })
-
+                songs.value = it
             })
         }
     }

@@ -11,6 +11,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.oigma.opemus.AppTopBar
 import com.oigma.opemus.R
@@ -23,8 +24,7 @@ import com.oigma.opemus.data.TrackManager
  * Created by Harsewak Singh on 09/01/2022.
  */
 @Composable
-fun LibraryView(trackManager: TrackManager) {
-    val navigationController = rememberNavController()
+fun LibraryView(trackManager: TrackManager, navigationController: NavHostController) {
 
     Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
         Scaffold(
@@ -82,7 +82,7 @@ fun LibraryItemView(item: LibraryItem) {
     Text(item.name.name, modifier = Modifier.defaultMinSize())
 }
 
-@Preview(showBackground = true)
+@Preview()
 @Composable
 fun DefaultPreview() {
     AppTheme {
