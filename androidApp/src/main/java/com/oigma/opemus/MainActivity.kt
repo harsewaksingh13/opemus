@@ -16,8 +16,7 @@ import com.oigma.opemus.data.executeTask
 import com.oigma.opemus.data.models.Track
 import com.oigma.opemus.data.services.ServiceManager
 import com.oigma.opemus.theme.AppTheme
-import com.oigma.opemus.ui.LibraryView
-import com.oigma.opemus.ui.SongsView
+import com.oigma.opemus.ui.*
 import kotlinx.coroutines.flow.MutableStateFlow
 
 
@@ -28,7 +27,7 @@ class MainActivity : ComponentActivity() {
         TrackManagerImpl(ServiceManager())
     private val songs: MutableStateFlow<List<Track>> =
         MutableStateFlow(listOf())
-    private lateinit var  player: Player
+    private lateinit var player: Player
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         deviceDataManager = DeviceDataManagerImpl(applicationContext)
@@ -41,10 +40,28 @@ class MainActivity : ComponentActivity() {
         setContent {
             val navController = rememberNavController()
             AppTheme {
-            NavHost(navController, startDestination = "welcome") {
-                composable("welcome") { LibraryView(trackManager, navController) }
-                composable("songs") { SongsView(songs.collectAsState().value, player) }
-            }
+                MainScreen(navController) {
+                    NavHost(navController, startDestination = BottomNavigationScreen.Home.route) {
+                        composable(BottomNavigationScreen.Home.route) {
+                            SimpleScreen("Home")
+                        }
+                        composable(BottomNavigationScreen.Explore.route) {
+                            SimpleScreen("Explore")
+                        }
+                        composable(BottomNavigationScreen.Library.route) {
+                            LibraryView(
+                                trackManager = trackManager,
+                                navigationController = navController
+                            )
+                        }
+                        composable("songs") {
+                            SongsView(songs.collectAsState().value, player)
+                        }
+                        composable(BottomNavigationScreen.Upgrade.route) {
+                            SimpleScreen("More")
+                        }
+                    }
+                }
             }
         }
     }
