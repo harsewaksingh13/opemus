@@ -30,9 +30,6 @@ fun MainScreen(navController: NavHostController, content: @Composable () -> Unit
         BottomNavigationScreen.Upgrade
     )
     Scaffold(
-        topBar = {
-            TopBar(title = "Home")
-        },
         bottomBar = {
             AppBottomNavigation(navController, bottomNavigationItems)
         }, modifier = Modifier.padding(top = Dp(20f), bottom = Dp(48f))

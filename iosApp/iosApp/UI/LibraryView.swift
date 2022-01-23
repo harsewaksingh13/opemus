@@ -15,6 +15,9 @@ typealias TrackManager = shared.TrackManager
 typealias TrackManagerImpl = shared.TrackManagerImpl
 typealias ServiceManager = shared.ServiceManager
 typealias Services = shared.Services
+typealias Track = shared.Track
+typealias TrackState = shared.TrackState
+
 
 let LibraryPreviewItems = LibraryItem.Companion.shared.previewItems
 
@@ -32,11 +35,20 @@ struct LibraryItemView: View {
 
 struct LibraryListView: View {
     
-   let items: [LibraryItem]
+    let items: [LibraryItem]
     
     var body: some View {
-        List(items, id: \.id) {
-            LibraryItemView(library: $0)
+        NavigationView {
+            List(items, id: \.id) { libraryItem in
+                NavigationLink {
+                    if libraryItem.isSongs {
+                        deviceDataManager.songsPicker()
+//                        SongsView(tracks: deviceDataManager.findTracks())
+                    }
+                } label: {
+                    LibraryItemView(library: libraryItem)
+                }
+            }
         }
     }
 }

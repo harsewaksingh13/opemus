@@ -28,11 +28,13 @@ class MainActivity : ComponentActivity() {
     private val songs: MutableStateFlow<List<Track>> =
         MutableStateFlow(listOf())
     private lateinit var player: Player
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         deviceDataManager = DeviceDataManagerImpl(applicationContext)
         player = Player(applicationContext)
-        // Logger.withTag("MainActivity").i("onCreate")
+
         lifecycle.addObserver(permissionManager)
         permissionManager.registry = activityResultRegistry
         WindowCompat.setDecorFitsSystemWindows(window, false)

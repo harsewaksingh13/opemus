@@ -25,6 +25,8 @@ data class LibraryItem(val id: Int, val icon: String, val name: LibraryType) {
             LibraryItem(2, "", LibraryType.albums)
         )
     }
+
+    val isSongs = name == LibraryType.songs
 }
 
 data class LibraryType(val name: String) {

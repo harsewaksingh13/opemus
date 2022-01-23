@@ -6,7 +6,6 @@ import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Color.Companion.White
 import com.oigma.opemus.*
 import com.oigma.opemus.android.Shapes
 
@@ -16,24 +15,21 @@ import com.oigma.opemus.android.Shapes
 
 private val DarkColorPalette = darkColors(
     primary = Color.DarkGray,
-    primaryVariant = Purple700,
-    secondary = Teal200,
+    primaryVariant = Color.DarkGray,
+    secondary = Color.Black,
     onPrimary = Color.LightGray
 )
 
 private val LightColorPalette = lightColors(
-    primary = White,
-    primaryVariant = Purple700,
-    secondary = Teal200,
-    onPrimary = Color.Black
-    /* Other default colors to override
+    primary = Color.White,
+    primaryVariant = Color.Green,
+    secondary = Color.Gray,
+    onPrimary = Color.Black,
     background = Color.White,
     surface = Color.White,
-    onPrimary = Color.White,
     onSecondary = Color.Black,
     onBackground = Color.Black,
     onSurface = Color.Black,
-    */
 )
 
 @Composable

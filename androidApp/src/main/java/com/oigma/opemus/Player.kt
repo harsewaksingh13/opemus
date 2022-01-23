@@ -8,9 +8,6 @@ import com.oigma.opemus.data.models.TrackState
 import kotlinx.coroutines.flow.MutableStateFlow
 
 
-
-
-
 /**
  * Created by Harsewak Singh on 16/01/2022.
  */
@@ -18,7 +15,7 @@ class Player(private val applicationContext: Context) {
 
     lateinit var track: MutableStateFlow<Track>
 
-     private val mediaPlayer: MediaPlayer = MediaPlayer().apply {
+    private val mediaPlayer: MediaPlayer = MediaPlayer().apply {
         setAudioAttributes(
             AudioAttributes.Builder()
                 .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
@@ -37,21 +34,20 @@ class Player(private val applicationContext: Context) {
         this.track.value.state = TrackState(TrackState.playing)
     }
 
-    fun reset(){
+    private fun reset() {
         mediaPlayer.reset()
         this.track.value.state = TrackState(TrackState.none)
-
     }
 
     fun play() {
-        if(!mediaPlayer.isPlaying) {
+        if (!mediaPlayer.isPlaying) {
             mediaPlayer.start()
             this.track.value.state = TrackState(TrackState.playing)
         }
     }
 
     fun pause() {
-        if(mediaPlayer.isPlaying) {
+        if (mediaPlayer.isPlaying) {
             mediaPlayer.pause()
             this.track.value.state = TrackState(TrackState.paused)
         }
