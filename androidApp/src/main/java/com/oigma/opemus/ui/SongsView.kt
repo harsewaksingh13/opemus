@@ -24,8 +24,12 @@ import com.oigma.opemus.theme.AppTheme
 
 @Composable
 fun SongsView(songs: List<Track>, player: Player) {
-    SongsListView(songs) {
-        player.play(it)
+    Screen {
+        ListView(items = songs, content = { track ->
+            Text(track.name,  modifier = Modifier.height(IntrinsicSize.Min))
+        }, clickHandler = {
+            player.play(it)
+        })
     }
 }
 

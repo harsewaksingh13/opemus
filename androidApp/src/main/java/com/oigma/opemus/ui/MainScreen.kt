@@ -1,6 +1,7 @@
 package com.oigma.opemus.ui
 
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
@@ -12,6 +13,7 @@ import androidx.compose.material.icons.filled.Terrain
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.Dp
 import androidx.navigation.NavHostController
@@ -54,7 +56,9 @@ sealed class BottomNavigationScreen(
 fun SimpleScreen(
     text: String
 ) {
-    Text(text = text)
+    Screen {
+        Text(text = text)
+    }
 }
 
 @Composable
