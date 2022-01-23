@@ -42,8 +42,7 @@ struct LibraryListView: View {
             List(items, id: \.id) { libraryItem in
                 NavigationLink {
                     if libraryItem.isSongs {
-                        deviceDataManager.songsPicker()
-//                        SongsView(tracks: deviceDataManager.findTracks())
+                        SongsView(tracks: deviceDataManager.findTracks())
                     }
                 } label: {
                     LibraryItemView(library: libraryItem)

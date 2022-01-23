@@ -15,9 +15,22 @@ protocol DeviceDataManager {
 
 extension Track {
     
+    private static var mediaItemTrack: MPMediaItem? = nil
+    
+    var mediaItem: MPMediaItem? {
+        get {
+            return Track.mediaItemTrack
+        }
+        set(value) {
+            Track.mediaItemTrack = value
+        }
+    }
+    
     class func toTrack(_ item : MPMediaItem) -> Track {
         
-        return Track(id: String(item.persistentID), name: item.title ?? "", duration: 1, size: 1, state: TrackState(state: TrackState.none))
+        let track = Track(id: String(item.persistentID), name: item.title ?? "", duration: 1, size: 1, state: TrackState(state: TrackState.none))
+        track.mediaItem = item
+        return track
     }
 }
 
