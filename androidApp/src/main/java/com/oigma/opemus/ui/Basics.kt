@@ -17,7 +17,7 @@ import com.oigma.opemus.data.ResponseHandler
 
 @Composable
 fun Screen(content: @Composable () -> Unit) {
-    Surface(modifier = Modifier.padding().fillMaxWidth().fillMaxHeight()) {
+    Surface(modifier = Modifier.padding(top = Dp(28f)).fillMaxWidth().fillMaxHeight()) {
         Box(Modifier.padding(Dp(20f)).fillMaxWidth().fillMaxHeight()) {
             content()
         }

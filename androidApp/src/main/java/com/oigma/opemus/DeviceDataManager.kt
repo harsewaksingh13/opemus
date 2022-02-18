@@ -203,7 +203,7 @@ class DeviceDataManagerImpl(private val context: Context) : DeviceDataManager {
             file?.let {
                 if (it.isDirectory) {
                     findMediaFile(it, files)
-                } else if (it.name.endsWith(".mp3")) {
+                } else if (it.name.endsWith(".mp3") || it.name.endsWith(".m4a")) {
                     files.add(it)
                 }
             }
