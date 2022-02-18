@@ -14,10 +14,13 @@ struct SongView: View {
     
     var track: Track
     var clickHandler: ClickHandler<Track>?
+    @EnvironmentObject var player: Player
+
     var body: some View {
         HStack {
             Text(track.name).onTapGesture(count: 1, perform: {
                 clickHandler?(track)
+                player.play(track: track)
             })
         }
     }

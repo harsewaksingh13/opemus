@@ -9,8 +9,12 @@
 import SwiftUI
 
 struct HomeView: View {
+    @State private var isPayer = true
+
     var body: some View {
-        Text("Home View, World!")
+        VStack {
+            Text("Home View, World!")
+        }
     }
 }
 

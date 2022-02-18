@@ -19,7 +19,6 @@
 		22349143279BD2700030D30A /* SongsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22349142279BD2700030D30A /* SongsView.swift */; };
 		226B6226278E04C8007D3B3C /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226B6225278E04C8007D3B3C /* LibraryView.swift */; };
 		226B622C278E473A007D3B3C /* LibraryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226B622B278E473A007D3B3C /* LibraryStore.swift */; };
-		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -49,7 +48,6 @@
 		226B6225278E04C8007D3B3C /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
 		226B622B278E473A007D3B3C /* LibraryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryStore.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,7 +125,6 @@
 				2234913B279B62B30030D30A /* Data */,
 				22349138279B5FB10030D30A /* Resources */,
 				226B6224278E04A9007D3B3C /* UI */,
-				7555FF82242A565900829871 /* ContentView.swift */,
 				2152FB032600AC8F00CF470E /* iOSApp.swift */,
 				058557D7273AAEEB004C7B11 /* Preview Content */,
 			);
@@ -243,7 +240,6 @@
 				22349137279B5F170030D30A /* HomeView.swift in Sources */,
 				22349135279B5E900030D30A /* MainView.swift in Sources */,
 				2234913F279B6DA70030D30A /* Player.swift in Sources */,
-				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

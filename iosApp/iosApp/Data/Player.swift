@@ -20,98 +20,89 @@ extension TrackState {
     static let none: Int32 = TrackState.companion.none
 }
 
-extension MPMusicPlayerController {
-    
+extension AVPlayer {
     var isPlaying: Bool {
-        return playbackState == MPMusicPlaybackState.playing
+        return timeControlStatus == .playing//rate != 0 && error == nil ||
     }
-    
 }
 
 
 
-class MediaPlayer  {
+private class MediaPlayer  {
     
-    private lazy var deviceMediaPlayer: MPMusicPlayerController = {
-        return MPMusicPlayerController.systemMusicPlayer
+   
+    lazy var audioPlayer : AVQueuePlayer = {
+        return AVQueuePlayer()
     }()
     
-    private var audioPlayer: AVAudioPlayer?
-    
     var isPlaying: Bool {
-        if let audioPlayer = audioPlayer {
-            return  audioPlayer.isPlaying
-        } else {
-            return deviceMediaPlayer.isPlaying
-        }
-        
+        return audioPlayer.isPlaying
     }
-
+  
     func play(track: Track) {
-        if let mediaItem = track.mediaItem {
-            deviceMediaPlayer.nowPlayingItem = mediaItem
-        } else {
-            audioPlayer = try? AVAudioPlayer(contentsOf: URL(fileURLWithPath: track.id))
-            audioPlayer?.play()
+        if let url = URL(string: track.id) {
+            let playerItem = AVPlayerItem.init(url: url)
+            audioPlayer.insert(playerItem, after: nil)
+            audioPlayer.play()
         }
     }
     
     func play() {
-        if let audioPlayer = audioPlayer {
-            audioPlayer.play()
-        } else {
-            deviceMediaPlayer.play()
-        }
+        audioPlayer.play()
     }
     
     func pause() {
-        if let audioPlayer = audioPlayer {
-            audioPlayer.pause()
-        } else {
-            deviceMediaPlayer.pause()
-        }
+        audioPlayer.pause()
     }
     
     func stop() {
-        if let audioPlayer = audioPlayer {
-            audioPlayer.stop()
-        } else {
-            deviceMediaPlayer.stop()
-        }
+        audioPlayer.replaceCurrentItem(with: nil)
     }
 }
+
 
 class Player: ObservableObject {
     
     @Published var track: Track?
     
-        
-    let mediaPlayer: MediaPlayer = MediaPlayer()
+    var playing: Bool {
+        return mediaPlayer.isPlaying
+    }
+    
+    private let mediaPlayer: MediaPlayer = MediaPlayer()
     
     
     func play(track: Track) {
-        //mediaPlayer.nowPlayingItem = track.mediaItem
+        self.track = track
         mediaPlayer.play(track: track)
     }
     
     func play() {
-        if (!mediaPlayer.isPlaying) {
+        if (!playing) {
             mediaPlayer.play()
             track?.state = TrackState(state: TrackState.playing)
         }
     }
     
     func pause() {
-        if (mediaPlayer.isPlaying) {
+        if (playing) {
             mediaPlayer.pause()
             track?.state = TrackState(state: TrackState.paused)
         }
     }
     
+    func toggle() {
+        if(playing) {
+            pause()
+        } else {
+            play()
+        }
+    }
+    
     func stop() {
-        if (mediaPlayer.isPlaying) {
+        if (playing) {
             mediaPlayer.stop()
-            track?.state = TrackState(state: TrackState.stopped)
+            track = nil
         }
     }
     
