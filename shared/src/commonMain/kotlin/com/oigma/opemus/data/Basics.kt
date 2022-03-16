@@ -4,6 +4,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlin.coroutines.cancellation.CancellationException
@@ -26,7 +27,7 @@ typealias Task = Job
 
 fun <T> Flow<T>.flowable(): Flowable<T> = Flowable(this)
 
-class Flowable<T>(private val origin: Flow<T>) : Flow<T> by origin {
+class Flowable<T>(val origin: Flow<T>) : Flow<T> by origin {
 
     //called in swift to observe flow data
     fun observe(responseHandler: ResponseHandler<T>): RequestHandler {
@@ -56,7 +57,7 @@ class RequestHandler(private val task: Task) {
 
     fun cancel(cause: String? = null) {
         cause?.let {
-            task.cancel(CancellationException(cause))
+            //task.cancel(CancellationException(cause))
         } ?: run { task.cancel() }
     }
 }

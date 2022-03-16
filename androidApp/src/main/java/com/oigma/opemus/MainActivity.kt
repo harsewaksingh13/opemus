@@ -57,7 +57,7 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                         composable("songs") {
-                            SongsView(songs.collectAsState().value, player)
+                            SongsView(trackManager.recentTracks.collectAsState(arrayListOf()).value, player)
                         }
                         composable(BottomNavigationScreen.Upgrade.route) {
                             SimpleScreen("More")
@@ -70,6 +70,11 @@ class MainActivity : ComponentActivity() {
 
     override fun onStart() {
         super.onStart()
+//        trackManager.recentTracks.observe {
+//            songs.value = it
+//        }
+//        songs.value = trackManager.recentTracks.mutable.value
+        trackManager.fetchTracks()
         permissionManager.requestStoragePermissions {
             executeTask({
                 deviceDataManager.findTracks()

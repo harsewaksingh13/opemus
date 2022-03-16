@@ -12,6 +12,7 @@ interface Services {
 
 
 class ServiceManager : Services {
+
     override val tracks: TrackService
         get() = TrackServiceImpl()
     override val auth: AuthService

@@ -28,7 +28,11 @@ class Player(private val applicationContext: Context) {
     fun play(track: Track) {
         this.track = MutableStateFlow(track)
         reset()
-        mediaPlayer.setDataSource(track.fd)
+        runCatching {
+            mediaPlayer.setDataSource(track.fd)
+        }.onFailure {
+            mediaPlayer.setDataSource(track.id)
+        }
         mediaPlayer.prepare()
         mediaPlayer.start()
         this.track.value.state = TrackState(TrackState.playing)
