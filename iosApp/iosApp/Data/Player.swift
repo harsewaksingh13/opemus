@@ -80,14 +80,12 @@ class Player: ObservableObject {
     func play() {
         if (!playing) {
             mediaPlayer.play()
-            track?.state = TrackState(state: TrackState.playing)
         }
     }
     
     func pause() {
         if (playing) {
             mediaPlayer.pause()
-            track?.state = TrackState(state: TrackState.paused)
         }
     }
     

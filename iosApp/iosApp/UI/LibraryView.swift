@@ -35,14 +35,14 @@ struct LibraryItemView: View {
 
 struct LibraryListView: View {
     
-    let items: [LibraryItem]
+    @ObservedObject var store: LibraryStore
     
     var body: some View {
         NavigationView {
-            List(items, id: \.id) { libraryItem in
+            List(store.libraryItems, id: \.id) { libraryItem in
                 NavigationLink {
                     if libraryItem.isSongs {
-                        SongsView(tracks: deviceDataManager.findTracks())
+                        SongsView(tracks: store.songs)
                     }
                 } label: {
                     LibraryItemView(library: libraryItem)
@@ -57,7 +57,7 @@ struct LibraryView: View {
     @StateObject var store = LibraryStore()
     
     var body: some View {
-        LibraryListView(items: store.libraryItems).onAppear(perform: {
+        LibraryListView(store: store).onAppear(perform: {
             store.start()
         })
     }
