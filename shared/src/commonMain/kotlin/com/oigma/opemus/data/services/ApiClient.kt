@@ -3,6 +3,7 @@ package com.oigma.opemus.data.services
 import com.oigma.opemus.httpClient
 import io.ktor.client.*
 import io.ktor.client.plugins.*
+import io.ktor.client.plugins.logging.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.client.utils.*
@@ -24,19 +25,23 @@ class ApiClient() {
                 prettyPrint = true
                 isLenient = true
             })
+            defaultRequest {
+                contentType(ContentType.Application.Json)
+            }
+        }
+        install(Logging) {
+            logger = Logger.DEFAULT
+            level = LogLevel.ALL
         }
     }
 
     suspend fun post(url: String, body: Any = EmptyContent): HttpResponse {
         return httpApiClient.post(URL.plus(url)) {
-            contentType(ContentType.Application.Json)
             setBody(body)
         }
     }
 
     suspend fun get(url: String): HttpResponse {
-        return httpApiClient.get(URL.plus(url)) {
-            contentType(ContentType.Application.Json)
-        }
+        return httpApiClient.get(URL.plus(url))
     }
 }
