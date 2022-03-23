@@ -8,7 +8,6 @@
 
 import SwiftUI
 
-typealias ClickHandler<T> = (T) -> Void
 
 struct SongView: View {
     

@@ -34,8 +34,6 @@ extension Track {
     }
 }
 
-let deviceDataManager: DeviceDataManager = DeviceDataManagerImpl()
-
 class DeviceDataManagerImpl: DeviceDataManager  {
 
 

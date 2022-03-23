@@ -8,8 +8,9 @@
 import Foundation
 
 class LibraryStore: ObservableObject {
-        
-    let trackManager: TrackManager = TrackManagerImpl(services: ServiceManager())
+      
+    @Inject
+    var trackManager: TrackManager
     
     @Published var libraryItems: [LibraryItem] = []
     

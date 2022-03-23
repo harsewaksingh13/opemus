@@ -7,19 +7,6 @@
 //
 
 import SwiftUI
-import shared
-
-typealias LibraryItem = shared.LibraryItem
-typealias LibraryType = shared.LibraryType
-typealias TrackManager = shared.TrackManager
-typealias TrackManagerImpl = shared.TrackManagerImpl
-typealias ServiceManager = shared.ServiceManager
-typealias Services = shared.Services
-typealias Track = shared.Track
-typealias TrackState = shared.TrackState
-
-
-let LibraryPreviewItems = LibraryItem.Companion.shared.previewItems
 
 struct LibraryItemView: View {
     
