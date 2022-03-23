@@ -39,6 +39,6 @@ struct SongsView: View {
 
 struct SongsView_Previews: PreviewProvider {
     static var previews: some View {
-        SongsView(tracks: [Track(id:"0", name:"Test song", duration: 1, size: 1, state: TrackState(state: TrackState.none))])
+        SongsView(tracks: [Track(id:"0", name:"Test song", duration: 1, size: 1)])
     }
 }

@@ -11,17 +11,7 @@ data class Track(
     val name: String,
     val duration: Int,
     val size: Int,
-    var state: TrackState = TrackState()
 )
-
-data class TrackState(var state: Int = none) {
-    companion object {
-        const val none: Int = -1
-        const val playing: Int = 1
-        const val paused: Int = 2
-        const val stopped: Int = 0
-    }
-}
 
 @Serializable
 data class Response<T>(

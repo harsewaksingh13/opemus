@@ -21,7 +21,6 @@ typealias TrackManagerImpl = shared.TrackManagerImpl
 typealias ServiceManager = shared.ServiceManager
 typealias Services = shared.Services
 typealias Track = shared.Track
-typealias TrackState = shared.TrackState
 
 
 ///MARK: Helper typealias

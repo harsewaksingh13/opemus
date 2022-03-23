@@ -12,14 +12,6 @@ import MediaPlayer
 
 
 
-
-extension TrackState {
-    static let playing: Int32 = TrackState.companion.playing
-    static let paused: Int32 = TrackState.companion.paused
-    static let stopped: Int32 = TrackState.companion.stopped
-    static let none: Int32 = TrackState.companion.none
-}
-
 extension AVPlayer {
     var isPlaying: Bool {
         return timeControlStatus == .playing//rate != 0 && error == nil ||
