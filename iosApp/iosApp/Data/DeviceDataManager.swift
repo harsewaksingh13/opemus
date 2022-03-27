@@ -28,7 +28,7 @@ extension Track {
     
     class func toTrack(_ item : MPMediaItem) -> Track {
         
-        let track = Track(id: String(item.persistentID), name: item.title ?? "", duration: 1, size: 1)
+        let track = Track(id: String(item.persistentID), name: item.title ?? "", duration: 1, size: 1, thumbnail: "")
         track.mediaItem = item
         return track
     }

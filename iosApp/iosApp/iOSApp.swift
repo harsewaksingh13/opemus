@@ -22,6 +22,7 @@ typealias ServiceManager = shared.ServiceManager
 typealias Services = shared.Services
 typealias Track = shared.Track
 
+let TrackPreview = Track(id:"0", name:"Test song", duration: 1, size: 1, thumbnail: "")
 
 ///MARK: Helper typealias
 typealias ClickHandler<T> = (T) -> Void
@@ -52,3 +53,28 @@ fileprivate class InstanceProvider<T> {
     }
 }
 
+extension Image {
+    
+    func load(url: String?) -> Self {
+        if let url = url, let uRL = URL(string: url) {
+            return self.data(url: uRL)
+        }
+        return self.resizable()
+    }
+    
+    func data(url: URL) -> Self {
+        let data = try? Data(contentsOf: url)
+        guard let data = data, let uiImage = UIImage(data: data) else {
+            return self.resizable()
+        }
+        return Image(uiImage: uiImage).resizable()
+        
+    }
+}
+
+
+extension UIScreen{
+   static let screenWidth = UIScreen.main.bounds.size.width
+   static let screenHeight = UIScreen.main.bounds.size.height
+   static let screenSize = UIScreen.main.bounds.size
+}

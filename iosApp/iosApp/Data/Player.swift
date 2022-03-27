@@ -22,7 +22,7 @@ extension AVPlayer {
 
 private class MediaPlayer  {
     
-   
+    
     lazy var audioPlayer : AVQueuePlayer = {
         return AVQueuePlayer()
     }()
@@ -30,12 +30,33 @@ private class MediaPlayer  {
     var isPlaying: Bool {
         return audioPlayer.isPlaying
     }
-  
+    
+    private var timeObserver: Any? = nil
+    
     func play(track: Track) {
         if let url = URL(string: track.id) {
             let playerItem = AVPlayerItem.init(url: url)
             audioPlayer.insert(playerItem, after: nil)
             audioPlayer.play()
+            addPeriodicTimeObserver()
+            
+        }
+    }
+    
+    private func addPeriodicTimeObserver() {
+        if let ob = self.timeObserver {
+            audioPlayer.removeTimeObserver(ob)
+        }
+        // Invoke callback every half second
+        let interval = CMTime(seconds: 0.5,
+                              preferredTimescale: CMTimeScale(NSEC_PER_SEC))
+        // Add time observer
+        timeObserver = audioPlayer.addPeriodicTimeObserver(forInterval: interval, queue: DispatchQueue.main) { [weak self] time in
+            let currentSeconds = CMTimeGetSeconds(time)
+            guard let duration = self?.audioPlayer.currentItem?.duration else { return }
+            let totalSeconds = CMTimeGetSeconds(duration)
+            let progress: Float = Float(currentSeconds/totalSeconds)
+            print(progress)
         }
     }
     

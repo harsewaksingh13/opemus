@@ -19,6 +19,6 @@ class TrackServiceImpl() : TrackService {
 
     override suspend fun recentlyPlayed(): List<Track> {
         val tracksData: Response<List<TrackResponse>> = client.get("tracks").body()
-        return tracksData.data?.map { t -> Track(t.file?.url ?: "", t.name ?: "", 10,10)  } ?: listOf()
+        return tracksData.data?.map { t -> Track(t.file?.url ?: "", t.name ?: "", 10,10, t.thumbnail)  } ?: listOf()
     }
 }

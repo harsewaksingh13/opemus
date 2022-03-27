@@ -9,8 +9,9 @@ import kotlinx.serialization.Serializable
 data class Track(
     val id: String,
     val name: String,
-    val duration: Int,
-    val size: Int,
+    val duration: Int = 0,
+    val size: Int = 0,
+    var thumbnail: String? = null,
 )
 
 @Serializable
